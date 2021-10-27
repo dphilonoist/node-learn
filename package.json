@@ -1,0 +1,24 @@
+{
+  "name": "learn",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dushyantec71/node-learn.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dushyantec71/node-learn/issues"
+  },
+  "homepage": "https://github.com/dushyantec71/node-learn#readme",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "validator": "^13.6.0",
+    "yargs": "^17.2.1"
+  }
+}

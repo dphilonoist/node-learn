@@ -1,0 +1,12 @@
+// const fs = require('fs')
+// const add = require('./node') 
+const validator = require('validator')
+const chalk = require('chalk')
+const yargs = require('yargs')
+// fs.writeFileSync('text.txt', 'Ram is going.')
+// fs.appendFileSync('text.txt', "/nI don't know whwew")
+// console.log(add(1,2))
+console.log(validator.isEmail('aaaa@kkk.com') ? chalk.green.bold(true) : chalk.bgBlue.red(false))
+console.log(2 + parseInt(process.argv[2]))
+const args = yargs.argv
+console.log(chalk[args.color](...args._))
