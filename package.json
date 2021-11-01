@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start-weather-app": "nodemon weather-app/src/app.js -e js,hbs"
   },
   "repository": {
     "type": "git",
@@ -18,7 +19,11 @@
   "homepage": "https://github.com/dushyantec71/node-learn#readme",
   "dependencies": {
     "chalk": "^4.1.2",
+    "express": "^4.17.1",
+    "hbs": "^4.1.2",
+    "request": "^2.88.2",
     "validator": "^13.6.0",
     "yargs": "^17.2.1"
   }
 }
+
