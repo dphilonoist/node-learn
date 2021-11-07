@@ -1,4 +1,6 @@
 const express = require('express')
+const multer = require('multer')
+const sharp = require('sharp')
 const User = require('./../models/User')
 const auth = require('./../middleware/auth')
 
@@ -58,6 +60,57 @@ router.post('/users/logoutall', auth, async (req, res) => {
 		await req.user.save()
 		res.send()
 } catch (err) {
+		res.status(400).send(err)
+	}
+})
+
+const upload = multer({
+	// dest: 'avatars',
+	limits: {
+		fileSize: 1000000,
+	},
+	fileFilter(req, file, cb) {
+		// if (!file.originalname.endsWith('.pdf')) {
+		// 	return cb(new Error('Please upload a valid file.'))
+		// }
+		if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+            return cb(new Error('Please upload a Word document'))
+        }
+		cb(undefined, true)
+		// cb(undefined, file)
+	}
+})
+
+router.get('/users/:id/avatar', async (req, res) => {
+	try {
+		const user = await User.findById(req.params.id)
+		if (!user || !user.avatar) {
+			throw new Error()
+		}
+		res.set('Content-Type', 'image/jpg')
+		res.send(user.avatar)
+	} catch (err) {
+		res.status(400).send(err)
+	}
+})
+
+router.post('/users/me/avatar', auth, upload.single('avatar'), async (req, res) => {
+	const buffer = await sharp(req.file.buffer).resize({ width: 250, height: 250 }).toBuffer()
+	req.user.avatar = buffer
+	// this buffer is accessible when we don't set dest in mutler
+	await req.user.save()
+	res.send()
+}, (err, req, res, next) => {
+	// to handle mutler error
+	res.status(400).send({error: err.message}) 
+})
+
+router.delete('/users/me/avatar', auth, async (req, res) => {
+	try {
+		req.user.avatar = undefined
+		await req.user.save()
+		res.send()
+	} catch (err) {
 		res.status(400).send(err)
 	}
 })
