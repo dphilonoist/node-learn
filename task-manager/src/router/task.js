@@ -4,10 +4,29 @@ const auth = require('./../middleware/auth')
 
 const router = new express.Router()
 
+// tasks?completed=true
+// tasks?limit=10&skip=0
+// tasks?sortBy=createdAt&sortOrder=desc
 router.get('/tasks', auth, async (req, res) => {
 	try {
 		// const tasks = await Task.find({ owner: req.user._id })
-		await req.user.populate('tasks')
+		const match = {}
+		const sort = {}
+		if (req.query.completed) {
+			match.completed = req.query.completed === "true"
+		}
+		if (req.query.sortBy) {
+			sort[req.query.sortBy] = req.query.sortOrder === "asc" ? 1 : -1
+		}
+		await req.user.populate({
+			path: 'tasks',
+			match,
+			options: {
+				limit: parseInt(req.query.limit),
+				skip: parseInt(req.query.skip),
+				sort,
+			}
+		})
 		res.status(201).send(req.user.tasks)
 	} catch (err) {
 		console.log(err)
