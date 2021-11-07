@@ -19,9 +19,11 @@
   },
   "homepage": "https://github.com/dushyantec71/node-learn#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "chalk": "^4.1.2",
     "express": "^4.17.1",
     "hbs": "^4.1.2",
+    "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.1.3",
     "mongoose": "^6.0.12",
     "request": "^2.88.2",
