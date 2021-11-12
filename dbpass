@@ -1,0 +1,5 @@
+taskapp
+taskPass!!1234
+mongodb+srv://taskapp:<password>@cluster0.ljy6s.mongodb.net/test
+
+prod-string mongodb+srv://taskapp:taskPass!!1234@cluster0.ljy6s.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
